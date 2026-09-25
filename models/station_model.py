@@ -1,6 +1,7 @@
 # from database.database import Database
 from models.model import Model
 
+
 # cargar aqui mismo la conexion del database no hay necesidad de
 # pasarle como parametro, se hace my grande el archivo padre
 # analizar la posibilidad de que todos los modelos hereden la conexion de una clase padre
