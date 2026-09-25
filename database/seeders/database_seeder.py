@@ -10,11 +10,11 @@ class DatabaseSeeder:
 
         with database.connect() as connection:
 
-            station_ids = StationSeeder.run(connection)
+            station_ids = StationsSeeder.run(connection)
 
-            program_type_ids = ProgramTypeSeeder.run(connection)
+            program_type_ids = ProgramTypesSeeder.run(connection)
 
-            ProgramTypeStationSeeder.run(
+            ProgramTypesStationsSeeder.run(
                 connection,
                 station_ids,
                 program_type_ids
