@@ -1,7 +1,8 @@
 from database.database import Database
 
+
 class Schema:
-    def initialize(self):
+    def initialize_database(self):
         db = Database()
         with db.connect() as connection:
             connection.executescript(
@@ -82,3 +83,8 @@ class Schema:
                     );
                 """
             )
+
+if __name__ == "__main__":
+    print("Initializing database >>>>>")
+    Schema().initialize_database()
+    print("Database initialized successfully >>>")
