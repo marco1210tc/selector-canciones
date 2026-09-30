@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from models.station_model import StationModel
+from database.models.station_model import StationModel
 
 # from models.station import Station
 from views.stations_view import StationsView

@@ -8,7 +8,6 @@ class ProgramTypeStationModel(Model):
             SELECT *
             FROM program_type_stations
         """
-        query += " ORDER BY id"
 
         with self.database.connect() as connection:
             return connection.execute(query, ()).fetchall()
@@ -33,3 +32,30 @@ class ProgramTypeStationModel(Model):
                 query,
                 (program_type_id,)
             ).fetchall()
+
+    def add_station(self, program_type_id, station_id, orden):
+        query = """
+            INSERT INTO program_type_stations (
+                program_type_id,
+                station_id,
+                orden
+            )
+            VALUES (?, ?, ?)
+        """
+
+        with self.database.connect() as connection:
+            cursor = connection.execute(
+                query,
+                (program_type_id, station_id, orden)
+            )
+
+            return cursor.lastrowid
+
+    def remove_station(self, program_type_station_id):
+        query = """
+            DELETE FROM program_type_stations
+            WHERE id = ?
+        """
+
+        with self.database.connect() as connection:
+            connection.execute(query, (program_type_station_id,))
