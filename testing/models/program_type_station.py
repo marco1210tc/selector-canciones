@@ -20,3 +20,5 @@ def remove_station(program_type_station_id):
   program_type_station_model = ProgramTypeStationModel()
   program_type_station_model.remove_station(program_type_station_id)
   print("Removed station")
+
+  
