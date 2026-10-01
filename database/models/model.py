@@ -2,6 +2,7 @@ from database.database import Database
 
 
 class Model:
+  
   database = Database()
 
 # def get_by_id(self, station_id, table_name):  implementar más adelante

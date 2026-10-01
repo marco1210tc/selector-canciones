@@ -6,11 +6,14 @@ from database.models.model import Model
 # pasarle como parametro, se hace my grande el archivo padre
 # analizar la posibilidad de que todos los modelos hereden la conexion de una clase padre
 class StationModel(Model):
-    
-    def __init__(self):
-        print("creado")
 
-    def get_all(self, active_only=False):
+    allowed_order_by = {
+        "nombre": "nombre",
+        "id": "id",
+        "activo": "activo",
+    }
+
+    def get_all(self, active_only=False, order_by="id"):
         query = """
             SELECT *
             FROM stations
@@ -21,7 +24,9 @@ class StationModel(Model):
         if active_only:
             query += " WHERE activo = 1"
 
-        query += " ORDER BY id"
+        order_by = self.allowed_order_by.get(order_by, "id")
+
+        query += f" ORDER BY {order_by}"
 
         with self.database.connect() as connection:
             return connection.execute(query, params).fetchall()
@@ -57,7 +62,7 @@ class StationModel(Model):
             connection.execute(
                 """
                 UPDATE stations
-                SET nombre = ?,
+                SET nombre = ?
                 WHERE id = ?
                 """,
                 (nombre, station_id),

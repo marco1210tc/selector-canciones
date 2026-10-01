@@ -2,21 +2,21 @@ import sqlite3
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-from database.models.station_model import StationModel
+from database.models.program_type_model import ProgramType
 
 
-class StationsView:
+class ProgramTypesView:
 
     def __init__(self, parent):
-        self.station_model = StationModel()
+        self.program_type_model = ProgramType()
 
         self.window = tk.Toplevel(parent)
-        self.window.title("Estaciones")
+        self.window.title("Tipos de programa")
         self.window.geometry("700x450")
         self.window.resizable(True, True)
 
         self.create_widgets()
-        self.load_stations()
+        self.load_program_types()
 
     def create_widgets(self):
 
@@ -107,8 +107,8 @@ class StationsView:
 
         ttk.Button(
             buttons_frame,
-            text="Nueva",
-            command=self.create_station
+            text="Nuevo",
+            command=self.create_program_type
         ).pack(
             side="left",
             padx=5
@@ -117,7 +117,7 @@ class StationsView:
         ttk.Button(
             buttons_frame,
             text="Editar",
-            command=self.edit_station
+            command=self.edit_program_type
         ).pack(
             side="left",
             padx=5
@@ -126,7 +126,7 @@ class StationsView:
         ttk.Button(
             buttons_frame,
             text="Activar / Desactivar",
-            command=self.toggle_station
+            command=self.toggle_program_type
         ).pack(
             side="left",
             padx=5
@@ -135,46 +135,46 @@ class StationsView:
         ttk.Button(
             buttons_frame,
             text="Actualizar",
-            command=self.load_stations
+            command=self.load_program_types
         ).pack(
             side="right",
             padx=5
         )
 
-    def load_stations(self):
+    def load_program_types(self):
 
         # Limpiar tabla
         for item in self.tree.get_children():
             self.tree.delete(item)
 
-        stations = self.station_model.get_all()
+        program_types = self.program_type_model.get_all()
 
-        for station in stations:
+        for program_type in program_types:
 
             estado = (
-                "Activa"
-                if station["activo"]
-                else "Inactiva"
+                "Activo"
+                if program_type["activo"]
+                else "Inactivo"
             )
 
             self.tree.insert(
                 "",
                 "end",
                 values=(
-                    station["id"],
-                    station["nombre"],
+                    program_type["id"],
+                    program_type["nombre"],
                     estado
                 )
             )
 
-    def get_selected_station(self):
+    def get_selected_program_type(self):
 
         selected = self.tree.selection()
 
         if not selected:
             messagebox.showwarning(
                 "Selección",
-                "Selecciona una estación."
+                "Selecciona un tipo de programa."
             )
             return None
 
@@ -186,94 +186,98 @@ class StationsView:
         return {
             "id": int(values[0]),
             "nombre": values[1],
-            "activo": values[2] == "Activa"
+            "activo": values[2] == "Activo"
         }
 
-    def create_station(self):
+    def create_program_type(self):
 
-        StationForm(
+        ProgramTypeForm(
             self.window,
-            title="Nueva estación",
-            on_save=self.save_new_station
+            title="Nuevo tipo de programa",
+            on_save=self.save_new_program_type
         )
 
-    def save_new_station(self, nombre):
+    def save_new_program_type(self, nombre):
 
         try:
-            self.station_model.create(nombre)
+            self.program_type_model.create(nombre)
 
         except sqlite3.IntegrityError:
             messagebox.showerror(
                 "Error",
-                "Ya existe una estación con ese nombre."
+                "Ya existe un tipo de programa con ese nombre."
             )
             return
 
-        self.load_stations()
+        self.load_program_types()
 
-    def edit_station(self):
+    def edit_program_type(self):
 
-        station = self.get_selected_station()
+        program_type = self.get_selected_program_type()
 
-        if station is None:
+        if program_type is None:
             return
 
-        StationForm(
+        ProgramTypeForm(
             self.window,
-            title="Editar estación",
-            station=station,
-            on_save=self.save_edited_station
+            title="Editar tipo de programa",
+            program_type=program_type,
+            on_save=self.save_edited_program_type
         )
 
-    def save_edited_station(self, station_id, nombre):
+    def save_edited_program_type(
+        self,
+        program_type_id,
+        nombre
+    ):
 
         try:
-            self.station_model.update(
-                station_id,
+            self.program_type_model.update(
+                program_type_id,
                 nombre
             )
 
         except sqlite3.IntegrityError:
             messagebox.showerror(
                 "Error",
-                "Ya existe una estación con ese nombre."
+                "Ya existe un tipo de programa con ese nombre."
             )
             return
 
-        self.load_stations()
+        self.load_program_types()
 
-    def toggle_station(self):
+    def toggle_program_type(self):
 
-        station = self.get_selected_station()
+        program_type = self.get_selected_program_type()
 
-        if station is None:
+        if program_type is None:
             return
 
-        nuevo_estado = not station["activo"]
+        nuevo_estado = not program_type["activo"]
 
-        self.station_model.set_active(
-            station["id"],
+        self.program_type_model.set_active(
+            program_type["id"],
             nuevo_estado
         )
 
-        self.load_stations()
+        self.load_program_types()
 
 
-class StationForm:
+class ProgramTypeForm:
 
     def __init__(
         self,
         parent,
         title,
         on_save,
-        station=None
+        program_type=None
     ):
         self.on_save = on_save
-        self.station = station
+        self.program_type = program_type
 
         self.window = tk.Toplevel(parent)
         self.window.title(title)
-        self.window.geometry("350x180")
+        self.window.geometry("380x180")
         self.window.resizable(False, False)
 
         frame = ttk.Frame(
@@ -302,10 +306,10 @@ class StationForm:
         )
 
         # Valor cuando editamos
-        if station:
+        if program_type:
             self.name_entry.insert(
                 0,
-                station["nombre"]
+                program_type["nombre"]
             )
 
         # Guardar
@@ -328,10 +332,10 @@ class StationForm:
             )
             return
 
-        if self.station:
+        if self.program_type:
 
             self.on_save(
-                self.station["id"],
+                self.program_type["id"],
                 nombre
             )
 

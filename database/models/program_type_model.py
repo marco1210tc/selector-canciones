@@ -12,7 +12,7 @@ class ProgramType(Model):
         if active_only:
             query += " WHERE activo = 1"
 
-        query += " ORDER BY nombre"
+        query += " ORDER BY id"
 
         with self.database.connect() as connection:
             return connection.execute(query).fetchall()
