@@ -19,7 +19,7 @@ class SongModel(Model):
         query += """
             ORDER BY
                 stations.nombre,
-                songs.orden
+                songs.titulo
         """
 
         with self.database.connect() as connection:
@@ -52,7 +52,7 @@ class SongModel(Model):
         if active_only:
             query += " AND activo = 1"
 
-        query += " ORDER BY orden"
+        query += " ORDER BY titulo"
 
         with self.database.connect() as connection:
             return connection.execute(
@@ -66,7 +66,6 @@ class SongModel(Model):
         tipo,
         numero_himno,
         referencia,
-        orden,
         station_id
     ):
         query = """
@@ -75,11 +74,10 @@ class SongModel(Model):
                 tipo,
                 numero_himno,
                 referencia,
-                orden,
                 station_id,
                 activo
             )
-            VALUES (?, ?, ?, ?, ?, ?, 1)
+            VALUES (?, ?, ?, ?, ?, 1)
         """
 
         with self.database.connect() as connection:
@@ -90,7 +88,6 @@ class SongModel(Model):
                     tipo,
                     numero_himno,
                     referencia,
-                    orden,
                     station_id
                 )
             )
@@ -104,7 +101,6 @@ class SongModel(Model):
         tipo,
         numero_himno,
         referencia,
-        orden,
         station_id
     ):
         query = """
@@ -114,7 +110,6 @@ class SongModel(Model):
                 tipo = ?,
                 numero_himno = ?,
                 referencia = ?,
-                orden = ?,
                 station_id = ?
             WHERE id = ?
         """
@@ -127,7 +122,6 @@ class SongModel(Model):
                     tipo,
                     numero_himno,
                     referencia,
-                    orden,
                     station_id,
                     song_id
                 )
