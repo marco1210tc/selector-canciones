@@ -144,3 +144,73 @@ class ProgramTypeStationModel(Model):
                         station_id
                     )
                 )
+
+    def save_configuration(self, program_type_id, station_ids):
+        with self.database.connect() as connection:
+            current_rows = connection.execute(
+                """
+                SELECT station_id
+                FROM program_type_stations
+                WHERE program_type_id = ?
+                """,
+                (program_type_id,)
+            ).fetchall()
+
+            current_station_ids = {
+                row["station_id"] for row in current_rows
+            }
+
+            new_station_ids = set(station_ids)
+
+            if len(station_ids) != len(new_station_ids):
+                raise ValueError(
+                    "No se pueden repetir estaciones."
+                )
+
+            # Eliminar asociaciones que ya no existen
+            for station_id in current_station_ids - new_station_ids:
+                connection.execute(
+                    """
+                    DELETE FROM program_type_stations
+                    WHERE program_type_id = ?
+                    AND station_id = ?
+                    """,
+                    (program_type_id, station_id)
+                )
+
+            # Agregar nuevas asociaciones
+            for orden, station_id in enumerate(station_ids, start=1):
+                if station_id not in current_station_ids:
+                    connection.execute(
+                        """
+                        INSERT INTO program_type_stations (
+                            program_type_id,
+                            station_id,
+                            orden
+                        )
+                        VALUES (?, ?, ?)
+                        """,
+                        (program_type_id, station_id, orden)
+                    )
+
+            # Evitamos conflictos con UNIQUE(program_type_id, orden)
+            connection.execute(
+                """
+                UPDATE program_type_stations
+                SET orden = -orden
+                WHERE program_type_id = ?
+                """,
+                (program_type_id,)
+            )
+
+            # Guardar el nuevo orden
+            for orden, station_id in enumerate(station_ids, start=1):
+                connection.execute(
+                    """
+                    UPDATE program_type_stations
+                    SET orden = ?
+                    WHERE program_type_id = ?
+                    AND station_id = ?
+                    """,
+                    (orden, program_type_id, station_id)
+                )

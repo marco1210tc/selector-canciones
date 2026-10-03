@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from views.program_types_view import ProgramTypesView
 from views.stations_view import StationsView
+from views.songs_view import SongsView
 
 
 class MainWindow:
@@ -55,6 +56,19 @@ class MainWindow:
             ipady=10,
             pady=5
         )
+
+        ttk.Button(
+            frame,
+            text="Administrar canciones",
+            command=self.open_songs
+        ).pack(
+            ipadx=20,
+            ipady=10,
+            pady=5
+        )
+
+    def open_songs(self):
+        SongsView(self.root)
 
     def open_stations(self):
         StationsView(self.root)

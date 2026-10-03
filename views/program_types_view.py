@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from database.models.program_type_model import ProgramType
+from views.program_type_station_view import ProgramTypeStationView
 
 
 class ProgramTypesView:
@@ -139,6 +140,31 @@ class ProgramTypesView:
         ).pack(
             side="right",
             padx=5
+        )
+
+        ttk.Button(
+            buttons_frame,
+            text="Configurar estaciones",
+            command=self.open_stations_configuration
+        ).pack(
+            side="left",
+            padx=5
+        )
+
+    def open_stations_configuration(self):
+
+        program_type = self.get_selected_program_type()
+
+        if program_type is None:
+            messagebox.showwarning(
+                "Configurar estaciones",
+                "Seleccione un tipo de programa."
+            )
+            return
+
+        ProgramTypeStationView(
+            self.window,
+            program_type
         )
 
     def load_program_types(self):
