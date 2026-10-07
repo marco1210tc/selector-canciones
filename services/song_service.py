@@ -5,6 +5,12 @@ class SongService:
     def __init__(self):
         self.song_model = SongModel()
 
+    def get_all(self, active_only=False):
+        return self.song_model.get_all(active_only)
+
+    def get_by_id(self, song_id):
+        return self.song_model.get_by_id(song_id)
+
     def _prepare_song_data(self, tipo, numero_himno):
         if tipo not in ("himno", "alabanza"):
             raise ValueError("El tipo de canción no es válido.")
@@ -26,7 +32,7 @@ class SongService:
         return None, "Folder"
 
     def create(self, titulo, tipo, numero_himno, station_id):
-        titulo = titulo.strip()
+        titulo = titulo.strip().upper()
 
         if not titulo:
             raise ValueError("El título es obligatorio.")
@@ -45,7 +51,7 @@ class SongService:
         )
 
     def update(self, song_id, titulo, tipo, numero_himno, station_id):
-        titulo = titulo.strip()
+        titulo = titulo.strip().upper()
 
         if not titulo:
             raise ValueError("El título es obligatorio.")
