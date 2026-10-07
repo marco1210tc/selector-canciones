@@ -12,7 +12,8 @@ class SongService:
         return self.song_model.get_by_id(song_id)
 
     def _prepare_song_data(self, tipo, numero_himno):
-        if tipo not in ("himno", "alabanza"):
+        tipo = tipo.lower()
+        if tipo not in self.song_model.tipos:
             raise ValueError("El tipo de canción no es válido.")
 
         if tipo == "himno":

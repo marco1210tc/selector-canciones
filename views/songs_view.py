@@ -321,7 +321,7 @@ class SongForm:
 
         self.type_combo = ttk.Combobox(
             frame,
-            values=("himno", "alabanza"),
+            values=("Himno", "Alabanza"),
             state="readonly",
             width=32
         )
@@ -493,9 +493,10 @@ class SongForm:
         self.on_type_changed()
 
     def on_type_changed(self, event=None):
-        tipo = self.type_combo.get()
+        tipo = self.type_combo.get().lower()
 
-        if tipo == "himno":
+
+        if tipo == self.song_service.song_model.tipos[0]:
             self.hymn_number_entry.config(
                 state="normal"
             )
@@ -504,7 +505,7 @@ class SongForm:
                 "Himnario"
             )
 
-        elif tipo == "alabanza":
+        elif tipo == self.song_service.song_model.tipos[1]:
             self.hymn_number_entry.delete(
                 0,
                 tk.END

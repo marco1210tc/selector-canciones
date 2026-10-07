@@ -3,6 +3,9 @@ from database.models.model import Model
 
 class SongModel(Model):
 
+    def __init__(self):
+        self.tipos = ["himno", "alabanza"]
+        
     def get_all(self, active_only=False):
         query = """
             SELECT
