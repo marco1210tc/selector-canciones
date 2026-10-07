@@ -102,3 +102,44 @@ class SongModel(Model):
 
         with self.database.connect() as connection:
             connection.execute(query, (1 if active else 0, song_id))
+
+    def get_with_usage(self, station_id):
+        
+        """Consulta todas las canciones de la estación X, cuántas veces se han utilizado y cuándo fue la última vez."""
+        query = """
+            SELECT
+                songs.id,
+                songs.titulo,
+                songs.tipo,
+                songs.numero_himno,
+                songs.referencia,
+                songs.station_id,
+                songs.activo,
+
+                COUNT(service_songs.id) AS usage_count,
+                MAX(services.fecha) AS last_used_date
+
+            FROM songs
+
+            LEFT JOIN service_songs
+                ON service_songs.song_id = songs.id
+
+            LEFT JOIN services
+                ON services.id = service_songs.service_id
+
+            WHERE songs.station_id = ?
+            AND songs.activo = 1
+
+            GROUP BY songs.id
+
+            ORDER BY
+                usage_count ASC,
+                last_used_date ASC,
+                songs.titulo ASC
+        """
+
+        with self.database.connect() as connection:
+            return connection.execute(
+                query,
+                (station_id,)
+            ).fetchall()
