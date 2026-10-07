@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-from database.models.station_model import StationModel
 from services.song_service import SongService
 
 
@@ -15,7 +14,6 @@ class SongsView:
         self.window.geometry("900x500")
         self.window.resizable(True, True)
 
-        self.station_model = StationModel()
         self.song_service = SongService()
 
         self.create_widgets()
@@ -152,7 +150,7 @@ class SongsView:
         for item in self.tree.get_children():
             self.tree.delete(item)
 
-        songs = self.song_service.get_all()
+        songs = self.song_service.get_all_songs()
 
         for song in songs:
             numero_himno = (
@@ -195,12 +193,11 @@ class SongsView:
 
         song_id = item["values"][0]
 
-        return self.song_service.get_by_id(song_id)
+        return self.song_service.get_song_by_id(song_id)
 
     def new_song(self):
         SongForm(
             self.window,
-            self.station_model,
             self.song_service,
             on_saved=self.load_songs
         )
@@ -213,7 +210,6 @@ class SongsView:
 
         SongForm(
             self.window,
-            self.station_model,
             self.song_service,
             song=song,
             on_saved=self.load_songs
@@ -241,13 +237,11 @@ class SongForm:
     def __init__(
         self,
         parent,
-        station_model,
         song_service,
         song=None,
         on_saved=None
     ):
         self.parent = parent
-        self.station_model = station_model
         self.song_service = song_service
         self.song = song
         self.on_saved = on_saved
@@ -458,7 +452,7 @@ class SongForm:
         )
 
     def load_stations(self):
-        stations = self.station_model.get_all(
+        stations = self.song_service.get_all_stations(
             active_only=True
         )
 

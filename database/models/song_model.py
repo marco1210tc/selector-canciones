@@ -2,10 +2,9 @@ from database.models.model import Model
 
 
 class SongModel(Model):
-
-    def __init__(self):
+    def __init__(self):        
         self.tipos = ["himno", "alabanza"]
-        
+
     def get_all(self, active_only=False):
         query = """
             SELECT
@@ -40,10 +39,7 @@ class SongModel(Model):
         """
 
         with self.database.connect() as connection:
-            return connection.execute(
-                query,
-                (song_id,)
-            ).fetchone()
+            return connection.execute(query, (song_id,)).fetchone()
 
     def get_by_station(self, station_id, active_only=False):
         query = """
@@ -58,19 +54,9 @@ class SongModel(Model):
         query += " ORDER BY titulo"
 
         with self.database.connect() as connection:
-            return connection.execute(
-                query,
-                (station_id,)
-            ).fetchall()
+            return connection.execute(query, (station_id,)).fetchall()
 
-    def create(
-        self,
-        titulo,
-        tipo,
-        numero_himno,
-        referencia,
-        station_id
-    ):
+    def create(self, titulo, tipo, numero_himno, referencia, station_id):
         query = """
             INSERT INTO songs (
                 titulo,
@@ -85,27 +71,12 @@ class SongModel(Model):
 
         with self.database.connect() as connection:
             cursor = connection.execute(
-                query,
-                (
-                    titulo,
-                    tipo,
-                    numero_himno,
-                    referencia,
-                    station_id
-                )
+                query, (titulo, tipo, numero_himno, referencia, station_id)
             )
 
             return cursor.lastrowid
 
-    def update(
-        self,
-        song_id,
-        titulo,
-        tipo,
-        numero_himno,
-        referencia,
-        station_id
-    ):
+    def update(self, song_id, titulo, tipo, numero_himno, referencia, station_id):
         query = """
             UPDATE songs
             SET
@@ -119,15 +90,7 @@ class SongModel(Model):
 
         with self.database.connect() as connection:
             connection.execute(
-                query,
-                (
-                    titulo,
-                    tipo,
-                    numero_himno,
-                    referencia,
-                    station_id,
-                    song_id
-                )
+                query, (titulo, tipo, numero_himno, referencia, station_id, song_id)
             )
 
     def set_active(self, song_id, active):
@@ -138,10 +101,4 @@ class SongModel(Model):
         """
 
         with self.database.connect() as connection:
-            connection.execute(
-                query,
-                (
-                    1 if active else 0,
-                    song_id
-                )
-            )
+            connection.execute(query, (1 if active else 0, song_id))

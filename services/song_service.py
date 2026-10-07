@@ -1,18 +1,25 @@
 from database.models.song_model import SongModel
+from database.models.station_model import StationModel
 
 
 class SongService:
     def __init__(self):
         self.song_model = SongModel()
+        self.station_model = StationModel()
 
-    def get_all(self, active_only=False):
+    def get_all_songs(self, active_only=False):
         return self.song_model.get_all(active_only)
 
-    def get_by_id(self, song_id):
+    def get_song_by_id(self, song_id):
         return self.song_model.get_by_id(song_id)
 
+    def get_all_stations(self, active_only=False):
+        return self.station_model.get_all(active_only)
+
+    def get_station_by_id(self, station_id):
+        return self.station_model.get_by_id(station_id)
+
     def _prepare_song_data(self, tipo, numero_himno):
-        tipo = tipo.lower()
         if tipo not in self.song_model.tipos:
             raise ValueError("El tipo de canción no es válido.")
 
@@ -34,6 +41,7 @@ class SongService:
 
     def create(self, titulo, tipo, numero_himno, station_id):
         titulo = titulo.strip().upper()
+        tipo = tipo.strip().lower()
 
         if not titulo:
             raise ValueError("El título es obligatorio.")
@@ -53,6 +61,7 @@ class SongService:
 
     def update(self, song_id, titulo, tipo, numero_himno, station_id):
         titulo = titulo.strip().upper()
+        tipo = tipo.strip().lower()
 
         if not titulo:
             raise ValueError("El título es obligatorio.")
