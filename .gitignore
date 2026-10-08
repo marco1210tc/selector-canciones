@@ -1,8 +1,11 @@
-__pycache__/ 
-**/__pycache__/ 
-*.pyc 
-testing/ 
+__pycache__/
+**/__pycache__/
+*.pyc
+testing/
 test.py
 
 # Entorno virtual
 .venv/
+
+# Configuración local
+.env
