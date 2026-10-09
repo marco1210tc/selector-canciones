@@ -4,6 +4,8 @@ __pycache__/
 testing/
 test.py
 
+node_modules/
+
 # Entorno virtual
 .venv/
 
