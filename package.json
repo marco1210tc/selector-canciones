@@ -2,5 +2,9 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
+  },
+
+  "scripts": {
+    "watch:css": "npx tailwindcss -i ./webui/css/input.css -o ./webui/css/app.css --watch"
   }
 }
