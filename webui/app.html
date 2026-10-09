@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Organizador de Culto</title>
+
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+
+<body class="min-h-screen bg-[#0b0d12] text-slate-200">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="flex w-60 flex-col border-r border-white/5 bg-[#0f1118]">
+
+      <!-- Logo -->
+      <div class="flex h-16 items-center gap-3 px-5">
+
+        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 shadow-lg shadow-indigo-600/20">
+          <span class="text-sm font-bold text-white">OC</span>
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold text-white">
+            Organizador
+          </p>
+
+          <p class="text-[11px] text-slate-500">
+            Programa de culto
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-3 py-5">
+
+        <p class="mb-2 px-3 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
+          Principal
+        </p>
+
+        <a href="#"
+          class="mb-1 flex items-center gap-3 rounded-lg bg-indigo-500/10 px-3 py-2.5 text-sm font-medium text-indigo-400">
+
+          <span class="text-base">⌂</span>
+
+          Dashboard
+
+        </a>
+
+
+        <a href="#"
+          class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white">
+
+          <span class="text-base">♫</span>
+
+          Canciones
+
+        </a>
+
+
+        <a href="#"
+          class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white">
+
+          <span class="text-base">☷</span>
+
+          Estaciones
+
+        </a>
+
+
+        <a href="#"
+          class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white">
+
+          <span class="text-base">▤</span>
+
+          Tipos de programa
+
+        </a>
+
+
+        <p class="mb-2 mt-8 px-3 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
+          Historial
+        </p>
+
+        <a href="#"
+          class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white">
+
+          <span class="text-base">◷</span>
+
+          Programas
+
+        </a>
+
+      </nav>
+
+
+      <!-- Bottom -->
+      <div class="border-t border-white/5 p-3">
+
+        <a href="#"
+          class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-500 transition hover:bg-white/5 hover:text-slate-300">
+
+          <span>⚙</span>
+
+          Configuración
+
+        </a>
+
+      </div>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="flex-1">
+
+      <!-- Header -->
+      <header class="flex h-16 items-center justify-between border-b border-white/5 px-8">
+
+        <div>
+          <h1 class="text-sm font-semibold text-white">
+            Dashboard
+          </h1>
+
+          <p class="text-xs text-slate-500">
+            Organizador de Culto
+          </p>
+        </div>
+
+
+        <div class="flex items-center gap-3">
+
+          <button id="themeToggle"
+            class="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition hover:bg-white/5 hover:text-white"
+            title="Cambiar tema">
+            ☼
+          </button>
+
+
+          <div class="h-8 w-px bg-white/5"></div>
+
+
+          <div class="flex items-center gap-2">
+
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/20 text-xs font-semibold text-indigo-400">
+              U
+            </div>
+
+            <span class="text-sm text-slate-400">
+              Usuario
+            </span>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- Content -->
+      <section class="mx-auto max-w-6xl px-8 py-10">
+
+
+        <!-- Welcome -->
+        <div class="mb-8">
+
+          <p class="text-sm text-slate-500">
+            Domingo
+          </p>
+
+          <h2 class="mt-1 text-2xl font-semibold tracking-tight text-white">
+            Prepara el próximo culto.
+          </h2>
+
+        </div>
+
+
+        <!-- Main action -->
+        <div
+          class="relative overflow-hidden rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/70 to-[#151824] p-7">
+
+          <!-- Decorative glow -->
+          <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-indigo-600/10 blur-3xl">
+          </div>
+
+
+          <div class="relative">
+
+            <p class="text-xs font-medium uppercase tracking-wider text-indigo-400">
+              Nuevo programa
+            </p>
+
+            <h3 class="mt-2 text-xl font-semibold text-white">
+              Generar programa de culto
+            </h3>
+
+            <p class="mt-2 max-w-lg text-sm leading-6 text-slate-400">
+              Selecciona el tipo de culto y genera las canciones
+              para cada estación.
+            </p>
+
+
+            <button
+              class="btn-primary mt-6 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-500">
+
+              Generar programa
+
+              <span>→</span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Bottom grid -->
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+
+
+          <!-- Recent -->
+          <div class="rounded-xl border border-white/5 bg-[#0f1118]">
+
+            <div class="flex items-center justify-between border-b border-white/5 px-5 py-4">
+
+              <div>
+                <h3 class="text-sm font-medium text-white">
+                  Programas recientes
+                </h3>
+
+                <p class="mt-0.5 text-xs text-slate-600">
+                  Últimos programas generados
+                </p>
+              </div>
+
+              <a href="#" class="text-xs text-indigo-400 hover:text-indigo-300">
+                Ver todos
+              </a>
+
+            </div>
+
+
+            <div>
+
+              <div class="flex items-center justify-between px-5 py-4 transition hover:bg-white/[0.02]">
+
+                <div>
+                  <p class="text-sm text-slate-300">
+                    Culto dominical
+                  </p>
+
+                  <p class="mt-1 text-xs text-slate-600">
+                    04 octubre 2026
+                  </p>
+                </div>
+
+                <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-slate-500">
+                  9 estaciones
+                </span>
+
+              </div>
+
+
+              <div class="border-t border-white/5"></div>
+
+
+              <div class="flex items-center justify-between px-5 py-4 transition hover:bg-white/[0.02]">
+
+                <div>
+                  <p class="text-sm text-slate-300">
+                    Culto dominical
+                  </p>
+
+                  <p class="mt-1 text-xs text-slate-600">
+                    27 septiembre 2026
+                  </p>
+                </div>
+
+                <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-slate-500">
+                  9 estaciones
+                </span>
+
+              </div>
+
+
+              <div class="border-t border-white/5"></div>
+
+
+              <div class="flex items-center justify-between px-5 py-4 transition hover:bg-white/[0.02]">
+
+                <div>
+                  <p class="text-sm text-slate-300">
+                    Santa Cena
+                  </p>
+
+                  <p class="mt-1 text-xs text-slate-600">
+                    20 septiembre 2026
+                  </p>
+                </div>
+
+                <span class="rounded-md bg-white/5 px-2 py-1 text-[11px] text-slate-500">
+                  6 estaciones
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Quick access -->
+          <div class="rounded-xl border border-white/5 bg-[#0f1118]">
+
+            <div class="border-b border-white/5 px-5 py-4">
+
+              <h3 class="text-sm font-medium text-white">
+                Administración
+              </h3>
+
+              <p class="mt-0.5 text-xs text-slate-600">
+                Configuración del sistema
+              </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 gap-3 p-4">
+
+              <a href="#"
+                class="group rounded-lg border border-white/5 p-4 transition hover:border-indigo-500/20 hover:bg-indigo-500/5">
+
+                <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                  ♫
+                </div>
+
+                <p class="text-sm font-medium text-slate-300 group-hover:text-white">
+                  Canciones
+                </p>
+
+                <p class="mt-1 text-xs text-slate-600">
+                  Administrar repertorio
+                </p>
+
+              </a>
+
+
+              <a href="#"
+                class="group rounded-lg border border-white/5 p-4 transition hover:border-indigo-500/20 hover:bg-indigo-500/5">
+
+                <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                  ☷
+                </div>
+
+                <p class="text-sm font-medium text-slate-300 group-hover:text-white">
+                  Estaciones
+                </p>
+
+                <p class="mt-1 text-xs text-slate-600">
+                  Orden del culto
+                </p>
+
+              </a>
+
+
+              <a href="#"
+                class="group rounded-lg border border-white/5 p-4 transition hover:border-indigo-500/20 hover:bg-indigo-500/5">
+
+                <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                  ▤
+                </div>
+
+                <p class="text-sm font-medium text-slate-300 group-hover:text-white">
+                  Tipos de programa
+                </p>
+
+                <p class="mt-1 text-xs text-slate-600">
+                  Estructuras de culto
+                </p>
+
+              </a>
+
+
+              <a href="#"
+                class="group rounded-lg border border-white/5 p-4 transition hover:border-indigo-500/20 hover:bg-indigo-500/5">
+
+                <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                  ⚙
+                </div>
+
+                <p class="text-sm font-medium text-slate-300 group-hover:text-white">
+                  Configuración
+                </p>
+
+                <p class="mt-1 text-xs text-slate-600">
+                  Preferencias
+                </p>
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Recuperar el tema guardado o usar "dark" por defecto
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    // Aplicar el tema inicial
+    body.classList.remove('theme-dark', 'theme-light');
+    body.classList.add(`theme-${savedTheme}`);
+
+    // Actualizar el icono del botón
+    themeToggle.textContent = savedTheme === 'light' ? '☾' : '☼';
+
+    // Cambiar el tema al hacer clic
+    themeToggle.addEventListener('click', () => {
+      const isLight = body.classList.contains('theme-light');
+      const newTheme = isLight ? 'dark' : 'light';
+
+      // Aplicar el nuevo tema
+      body.classList.remove('theme-dark', 'theme-light');
+      body.classList.add(`theme-${newTheme}`);
+
+      // Guardar la preferencia
+      localStorage.setItem('theme', newTheme);
+
+      // Actualizar el icono
+      themeToggle.textContent = newTheme === 'light' ? '☾' : '☼';
+    });
+  </script>
+
+</body>
+
+</html>

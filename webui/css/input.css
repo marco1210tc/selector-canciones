@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* =========================================
+   LIGHT THEME
+   ========================================= */
+
+.theme-light {
+    background: #f5f7fb;
+    color: #1e293b;
+}
+
+/* Fondo principal */
+.theme-light.bg-\[\#0b0d12\] {
+    background: #f5f7fb;
+}
+
+/* Sidebar y superficies */
+.theme-light .bg-\[\#0f1118\] {
+    background: #ffffff;
+}
+
+/* Bordes */
+.theme-light .border-white\/5 {
+    border-color: #e5e7eb;
+}
+
+/* Textos */
+.theme-light .text-white {
+    color: #111827;
+}
+
+.theme-light .text-slate-200 {
+    color: #334155;
+}
+
+.theme-light .text-slate-300 {
+    color: #475569;
+}
+
+.theme-light .text-slate-400 {
+    color: #64748b;
+}
+
+.theme-light .text-slate-500 {
+    color: #64748b;
+}
+
+.theme-light .text-slate-600 {
+    color: #94a3b8;
+}
+
+/* Separadores */
+.theme-light .divide-white\/5 > :not(:last-child) {
+    border-color: #e5e7eb;
+}
+
+/* Hover de navegación */
+.theme-light .hover\:bg-white\/5:hover {
+    background-color: #f1f5f9;
+}
+
+.theme-light .hover\:text-white:hover {
+    color: #111827;
+}
+
+/* Tarjetas */
+.theme-light .hover\:bg-white\/\[0\.02\]:hover {
+    background-color: #f8fafc;
+}
+
+/* Botones / elementos translúcidos */
+.theme-light .bg-white\/5 {
+    background-color: #f1f5f9;
+}
+
+.theme-light .text-slate-500.hover\:text-slate-300:hover {
+    color: #475569;
+}
+
+/* Panel principal */
+.theme-light .from-indigo-950\/70 {
+    --tw-gradient-from: #eef2ff;
+}
+
+.theme-light .to-\[\#151824\] {
+    --tw-gradient-to: #ffffff;
+}
+
+/* Texto dentro del panel principal */
+.theme-light .text-indigo-400 {
+    color: #6366f1;
+}
+
+/* Glow */
+.theme-light .bg-indigo-600\/10 {
+    background-color: rgb(99 102 241 / 0.08);
+}
+
+/* Mantener texto blanco sobre fondos índigo en tema claro */
+.theme-light .bg-indigo-600,
+.theme-light .bg-indigo-500 {
+    color: #ffffff;
+}
+
+.theme-light .bg-indigo-600 .text-white,
+.theme-light .bg-indigo-500 .text-white {
+    color: #ffffff;
+}
+
+.theme-light .btn-primary:hover {
+    background-color: #3730a3;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgb(79 70 229 / 30%);
+}
