@@ -1,28 +1,12 @@
+PROGRAM_TYPES = ["Culto normal", "Cena del Señor"]
+
 class ProgramTypesSeeder:
-
-    program_types = [
-        "Culto normal",
-        "Cena del Señor",
-    ]
-
-    @classmethod
-    def run(cls, connection):
-
-        program_type_ids = {}
-
-        for nombre in cls.program_types:
-
+    @staticmethod
+    def run(connection):
+        ids = {}
+        for nombre in PROGRAM_TYPES:
             cursor = connection.execute(
-                """
-                INSERT INTO program_types (
-                    nombre,
-                    activo
-                )
-                VALUES (?, 1)
-                """,
-                (nombre,)
+                "INSERT INTO program_types (nombre, activo) VALUES (?, 1)", (nombre,)
             )
-
-            program_type_ids[nombre] = cursor.lastrowid
-
-        return program_type_ids
+            ids[nombre] = cursor.lastrowid
+        return ids

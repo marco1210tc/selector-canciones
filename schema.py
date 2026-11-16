@@ -53,7 +53,7 @@ class Schema:
 
                     CREATE TABLE IF NOT EXISTS services (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        fecha TEXT NOT NULL UNIQUE,
+                        fecha DATE NOT NULL,
                         program_type_id INTEGER NOT NULL,
 
                         FOREIGN KEY (program_type_id)
