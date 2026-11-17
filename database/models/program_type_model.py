@@ -1,7 +1,7 @@
 from database.models.model import Model
 
 
-class ProgramType(Model):
+class ProgramTypeModel(Model):
 
     def get_all(self, active_only=False):
         query = """
